@@ -17,8 +17,9 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">State Code</th>
+                    <th scope="col">Session</th>
+                    <th scope="col">Posting Date</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Update</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -28,8 +29,9 @@
                     foreach ($records as $row) {
                         echo "<tr>";
                         echo "<td>" . $row["id"] . "</td>";
-                        echo "<td>" . $row["name"] . "</td>";
-                        echo "<td>" . $row["state_id"] . "</td>";
+                        echo "<td>" . $row["session"] . "</td>";
+                        echo "<td>" . $row["postingdate"] . "</td>";
+                        echo "<td>" . $row["status"] . "</td>";
                         echo "<td><a href='update?updateid=" . $row["id"] . "' class='btn btn-primary'>update</a></td>";
                         echo "<td><a href='delete?deleteid=" . $row["id"] . "' class='btn btn-danger'>Delete</a></td>";
                         echo "</tr>";

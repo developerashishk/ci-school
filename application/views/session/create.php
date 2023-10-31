@@ -12,9 +12,18 @@
         <h1>Country Form </h1>
         <form method="post">
             <div class="mb-3">
-                <label for="name" class="form-label">Country Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Country Name">
-            </div>            
+                <label for="session" class="form-label">Session</label>
+                <input type="date" class="form-control" id="session" name="session" placeholder="Session">
+            </div>
+            <div class="mb-3">
+                <label for="postingdate" class="form-label">Session</label>
+                <input type="date" class="form-control" id="postingdate" name="postingdate" placeholder="postingdate">
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <input type="number" class="form-control" id="status" name="status" placeholder="status">
+            </div>
+            
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
             
         </form>
