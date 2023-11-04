@@ -13,14 +13,13 @@ class State_model extends CI_Model {
             echo "Error: " . $sql . "<br>" . $this->db->error();
         }
     }
-
     function records(){
         $this->load->database();
-        $sql = "SELECT * FROM states";
+        $sql = "SELECT * FROM states ORDER BY ID DESC LIMIT 10";
         $result = $this->db->query($sql)->result_array();
         return $result;
     }
-
+  
     function getRecord(){
         $this->load->database();
         $id = $_GET['updateid'];
