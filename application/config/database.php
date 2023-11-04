@@ -1,5 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+// Create the Dotenv instance
+use Dotenv\Dotenv;
+// Specify the path to your .env file
+$dotenvPath = FCPATH;  // Update this to the actual path
+
+// Create the Dotenv instance and load the environment variables
+$dotenv = Dotenv::createMutable($dotenvPath);
+
+// Load the environment variables from .env
+$dotenv->load();
 
 /*
 | -------------------------------------------------------------------
@@ -75,10 +85,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'ci-school',
+	'hostname' => $_ENV['DB_HOST'],
+	'username' => $_ENV['DB_USER'],
+	'password' => $_ENV['DB_PASSWORD'],
+	'database' => $_ENV['DB_DATABASE'],
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
