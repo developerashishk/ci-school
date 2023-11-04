@@ -17,14 +17,19 @@
                 <label for="name" class="form-label">Country Name</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Enter Country Name">
             </div>
+            <div class="mb-3">
+                <label for="roll" class="form-label">Short Country Code</label>
+                <input type="text" class="form-control" id="roll" name="sortname" placeholder="Enter Short Code">
+            </div>
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+
         </form>
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
-                    <th scope="col">State Code</th>
+                    <th scope="col">Short Code</th>
                     <th scope="col">Update</th>
                     <th scope="col">Delete</th>
                 </tr>
