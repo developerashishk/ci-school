@@ -73,4 +73,15 @@ class Subject_model extends CI_Model {
         }
     }
 
+    function ajax_del($subid){
+        $this->load->database();
+        // sql to delete a record
+        $sql = "DELETE FROM subject WHERE subid=$subid";
+        if ($this->db->query($sql) === TRUE) {
+                    return true;
+            } else {
+                return false;
+            }
+        }
+
 }

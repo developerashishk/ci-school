@@ -13,9 +13,9 @@
     <div class="container">
         <h1>Country Form </h1>
         <form name="myForm" method="post" id="createCityForm" onsubmit="return addCity();">
-        <div class="mb-3">
+            <div class="mb-3">
                 <label for="cshort" class="form-label">Course Short</label>
-                <input type="number" class="form-control" id="cshort" name="cshort" placeholder="Enter Course Short">
+                <input type="text" class="form-control" id="cshort" name="cshort" placeholder="Enter Course Short">
             </div>
             <div class="mb-3">
                 <label for="cfull" class="form-label">Course Name</label>
@@ -46,7 +46,7 @@
         </form>
         <table class="table">
             <thead>
-            <tr>
+                <tr>
                     <th scope="col">Sub ID</th>
                     <th scope="col">C Short</th>
                     <th scope="col">C Full</th>
@@ -72,6 +72,15 @@
             url: "ajax_records",
             success: function(result) {
                 $("#records").html(result);
+            }
+        });
+    }
+
+    function ajax_del(subid) {
+        $.ajax({
+            url: "ajax_del/" + subid,
+            success: function(result) {
+                renderList();
             }
         });
     }

@@ -49,9 +49,14 @@ class Subject extends CI_Controller {
             echo "<td>" . $row["dt_created"] . "</td>";
             echo "<td>" . $row["update_date"] . "</td>";
             echo "<td><a href='update?updateid=" . $row["subid"] . "' class='btn btn-primary'>update</a></td>";
-            echo "<td><a href='delete?deleteid=" . $row["subid"] . "' class='btn btn-danger'>Delete</a></td>";
+            echo "<td><a onclick=ajax_del(" . $row["subid"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }
+    }
+
+    function ajax_del($subid){
+        $this->load->model('Subject_model');
+        $this->Subject_model->ajax_del($subid);
     }
 
     function ajax_create(){

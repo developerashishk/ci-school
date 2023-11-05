@@ -45,9 +45,13 @@ class Course extends CI_Controller {
             echo "<td>" . $row["cdate"] . "</td>";
             echo "<td>" . $row["update_date"] . "</td>";
             echo "<td><a href='update?updateid=" . $row["cid"] . "' class='btn btn-primary'>update</a></td>";
-            echo "<td><a href='delete?deleteid=" . $row["cid"] . "' class='btn btn-danger'>Delete</a></td>";
+            echo "<td><a onclick=ajax_del(" . $row["cid"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }
+    }
+    function ajax_del($cid){
+        $this->load->model('Course_model');
+        $this->Course_model->ajax_del($cid);
     }
 
     function ajax_create(){
