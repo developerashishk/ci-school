@@ -24,6 +24,18 @@
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 
         </form>
+        <form name="myForm" method="post" id="updateCityForm" style="display:none" onsubmit="return updateCity();">
+            <div class="mb-3">
+                <label for="name" class="form-label">Country Name</label>
+                <input type="text" class="form-control" id="update_name" name="name" placeholder="Enter Country Name">
+            </div>
+            <div class="mb-3">
+                <label for="roll" class="form-label">Short Country Code</label>
+                <input type="text" class="form-control" id="update_roll" name="sortname" placeholder="Enter Short Code">
+            </div>
+            <input type="hidden" id="update_id" name="id" />
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
         <table class="table">
             <thead>
                 <tr>
@@ -67,6 +79,27 @@
             data: formdata,
             success: function(result) {
                 renderList();
+            }
+        });
+        return false;
+    }
+
+    function update(data){
+        document.getElementById("updateCityForm").style.display="block";
+        document.getElementById("update_name").value=data.name;
+        document.getElementById("update_roll").value=data.sortname;
+        document.getElementById("update_id").value=data.id;
+    }
+
+    function updateCity(){
+        var formdata = $("#updateCityForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax_update",
+            data: formdata,
+            success: function(result) {
+                renderList();
+                document.getElementById("updateCityForm").style.display="none";
             }
         });
         return false;

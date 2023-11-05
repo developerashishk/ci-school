@@ -73,4 +73,22 @@ class Country_model extends CI_Model {
                 return false;
             }
         }
+
+    function ajax_update(){
+        $this->load->database();
+        if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+            $id = $_POST['id'];
+            $name = $_POST['name'];
+            $sortname = $_POST['sortname'];
+
+            $sql = "UPDATE countries SET name='$name', sortname='$sortname' WHERE id=$id";
+        
+            if ($this->db->query($sql) === TRUE) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
+
+}
