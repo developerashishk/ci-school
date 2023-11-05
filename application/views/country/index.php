@@ -49,7 +49,16 @@
             }
         });
     }
- 
+
+    function ajax_del(id) {
+        $.ajax({
+            url: "ajax_del/"+id,
+            success: function(result) {
+                renderList();
+            }
+        });
+    }
+
     function addCity() {
         var formdata = $("#createCityForm").serialize();
         $.ajax({

@@ -45,11 +45,14 @@ class Country extends CI_Controller {
             echo "<td>" . $row["name"] . "</td>";
             echo "<td>" . $row["sortname"] . "</td>";
             echo "<td><a href='update?updateid=" . $row["id"] . "' class='btn btn-primary'>update</a></td>";
-            echo "<td><a href='delete?deleteid=" . $row["id"] . "' class='btn btn-danger'>Delete</a></td>";
+            echo "<td><a onclick=ajax_del(" . $row["id"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }
     }
-
+    function ajax_del($id){
+        $this->load->model('Country_model');
+        $this->Country_model->ajax_del($id);
+    }
     function ajax_create(){
         $this->load->model('Country_model');
         $this->Country_model->create();

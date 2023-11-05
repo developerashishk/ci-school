@@ -63,4 +63,14 @@ class Country_model extends CI_Model {
         }
     }
 
-}
+    function ajax_del($id){
+        $this->load->database();
+        // sql to delete a record
+        $sql = "DELETE FROM countries WHERE id=$id";
+        if ($this->db->query($sql) === TRUE) {
+                    return true;
+            } else {
+                return false;
+            }
+        }
+    }
