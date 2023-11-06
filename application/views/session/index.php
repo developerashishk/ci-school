@@ -14,24 +14,18 @@
         <h1>Country Form </h1>
         <form name="myForm" method="post" id="createCityForm" onsubmit="return addCity();">
             <div class="mb-3">
-                <label for="FullName" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="FullName" name="FullName" placeholder="Enter Full Name">
+                <label for="session" class="form-label">Session</label>
+                <input type="date" class="form-control" id="session" name="session" placeholder="Session">
             </div>
             <div class="mb-3">
-                <label for="AdminEmail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="AdminEmail" name="AdminEmail"
-                    placeholder="Enter Email">
+                <label for="postingdate" class="form-label">Post Date</label>
+                <input type="date" class="form-control" id="postingdate" name="postingdate" placeholder="postingdate">
             </div>
             <div class="mb-3">
-                <label for="loginid" class="form-label">Username</label>
-                <input type="text" class="form-control" id="loginid" name="loginid"
-                    placeholder="Enter Short Code">
+                <label for="status" class="form-label">Status</label>
+                <input type="number" class="form-control" id="status" name="status" placeholder="status">
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password"
-                    placeholder="Enter Password">
-            </div>
+
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 
         </form>
@@ -39,10 +33,11 @@
             <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Password</th>
+                    <th scope="col">Session</th>
+                    <th scope="col">Posting Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody id="records">

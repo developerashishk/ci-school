@@ -47,9 +47,13 @@ class Login extends CI_Controller {
             echo "<td>" . $row["loginid"] . "</td>";
             echo "<td>" . $row["password"] . "</td>";
             echo "<td><a href='update?updateid=" . $row["id"] . "' class='btn btn-primary'>update</a></td>";
-            echo "<td><a href='delete?deleteid=" . $row["id"] . "' class='btn btn-danger'>Delete</a></td>";
+            echo "<td><a onclick=ajax_del(" . $row["id"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }
+    }
+    function ajax_del($id){
+        $this->load->model('Login_model');
+        $this->Login_model->ajax_del($id);
     }
 
     function ajax_create(){
