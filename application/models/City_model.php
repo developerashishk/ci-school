@@ -73,5 +73,21 @@ class City_model extends CI_Model {
                 return false;
             }
         }
+        function ajax_update(){
+            $this->load->database();
+            if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+                $id = $_POST['id'];
+                $name = $_POST['name'];
+                $state_id = $_POST['state_id'];
+    
+                $sql = "UPDATE cities SET name='$name', state_id='$state_id' WHERE id=$id";
+            
+                if ($this->db->query($sql) === TRUE) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
 
 }
