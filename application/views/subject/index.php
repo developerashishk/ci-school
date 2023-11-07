@@ -4,18 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Country </title>
+    <title>Subject</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="container">
-        <h1>Country Form </h1>
+        <h1>Subject Form</h1>
         <form name="myForm" method="post" id="createCityForm" onsubmit="return addCity();">
             <div class="mb-3">
-                <label for="cshort" class="form-label">Course Short</label>
-                <input type="text" class="form-control" id="cshort" name="cshort" placeholder="Enter Course Short">
+                <label for="cshort" class="form-label">Course Short Number</label>
+                <input type="number" class="form-control" id="cshort" name="cshort" placeholder="Enter Course Short">
             </div>
             <div class="mb-3">
                 <label for="cfull" class="form-label">Course Name</label>
@@ -23,19 +23,19 @@
             </div>
             <div class="mb-3">
                 <label for="sub1" class="form-label">Subject first</label>
-                <input type="text" class="form-control" id="sub1" name="sub1" placeholder="Enter Country Subject">
+                <input type="text" class="form-control" id="sub1" name="sub1" placeholder="Enter Course Subject">
             </div>
             <div class="mb-3">
                 <label for="sub2" class="form-label">Subject second</label>
-                <input type="text" class="form-control" id="sub2" name="sub2" placeholder="Enter Country Subject">
+                <input type="text" class="form-control" id="sub2" name="sub2" placeholder="Enter Course Subject">
             </div>
             <div class="mb-3">
                 <label for="sub3" class="form-label">Subject third</label>
-                <input type="text" class="form-control" id="sub3" name="sub3" placeholder="Enter Country Subject">
+                <input type="text" class="form-control" id="sub3" name="sub3" placeholder="Enter Course Subject">
             </div>
             <div class="mb-3">
                 <label for="sub4" class="form-label">Subject fourth</label>
-                <input type="text" class="form-control" id="sub4" name="sub4" placeholder="Enter Country Subject">
+                <input type="text" class="form-control" id="sub4" name="sub4" placeholder="Enter Course Subject">
             </div>
             <div class="mb-3">
                 <label for="dt_created" class="form-label">Date </label>
@@ -44,6 +44,37 @@
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 
         </form>
+
+
+
+        <form name="myForm" method="post" id="updateCityForm" style="display:none" onsubmit="return updateCity();">
+    <div class="mb-3">
+        <label for="update_cfull" class="form-label">Course Name</label>
+        <input type="text" class="form-control" id="update_cfull" name="cfull" placeholder="Enter Course Name">
+    </div>
+    <div class="mb-3">
+        <label for="update_sub1" class="form-label">Subject first</label>
+        <input type="text" class="form-control" id="update_sub1" name="sub1" placeholder="Enter Course Subject">
+    </div>
+    <div class="mb-3">
+        <label for="update_sub2" class="form-label">Subject second</label>
+        <input type="text" class="form-control" id="update_sub2" name="sub2" placeholder="Enter Course Subject">
+    </div>
+    <div class="mb-3">
+        <label for="update_sub3" class="form-label">Subject third</label>
+        <input type="text" class="form-control" id="update_sub3" name="sub3" placeholder="Enter Course Subject">
+    </div>
+    <div class="mb-3">
+        <label for="update_sub4" class="form-label">Subject fourth</label>
+        <input type="text" class="form-control" id="update_sub4" name="sub4" placeholder="Enter Course Subject">
+    </div>
+
+    <input type="hidden" id="update_subid" name="subid" />
+    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+
         <table class="table">
             <thead>
                 <tr>
@@ -78,7 +109,7 @@
 
     function ajax_del(subid) {
         $.ajax({
-            url: "ajax_del/" + subid,
+            url: "ajax_del/"+subid,
             success: function(result) {
                 renderList();
             }
@@ -93,6 +124,30 @@
             data: formdata,
             success: function(result) {
                 renderList();
+            }
+        });
+        return false;
+    }
+
+    function update(data){
+        document.getElementById("updateCityForm").style.display="block";
+        document.getElementById("update_cfull").value=data.cfull;
+        document.getElementById("update_sub1").value=data.sub1;
+        document.getElementById("update_sub2").value=data.sub2;
+        document.getElementById("update_sub3").value=data.sub3;
+        document.getElementById("update_sub4").value=data.sub4;
+        document.getElementById("update_subid").value=data.subid;
+    }
+
+    function updateCity(){
+        var formdata = $("#updateCityForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax_update",
+            data: formdata,
+            success: function(result) {
+                renderList();
+                document.getElementById("updateCityForm").style.display="none";
             }
         });
         return false;

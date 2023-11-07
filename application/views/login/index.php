@@ -35,6 +35,27 @@
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 
         </form>
+
+        <form name="myForm" method="post" id="updateCityForm" style="display:none" onsubmit="return updateCity();">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="update_FullName" name="FullName" placeholder="Enter FullName Name">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Email</label>
+                <input type="email" class="form-control" id="update_AdminEmail" name="AdminEmail" placeholder="Enter Email">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Username</label>
+                <input type="text" class="form-control" id="update_loginid" name="loginid" placeholder="Enter Username">
+            </div>
+            <div class="mb-3">
+                <label for="roll" class="form-label">Password</label>
+                <input type="password" class="form-control" id="update_password" name="password" placeholder="Enter Password">
+            </div>
+            <input type="hidden" id="update_id" name="id" />
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
         <table class="table">
             <thead>
                 <tr>
@@ -51,7 +72,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script>
+        <script>
     function renderList() {
         $.ajax({
             url: "ajax_records",
@@ -63,7 +84,7 @@
 
     function ajax_del(id) {
         $.ajax({
-            url: "ajax_del/" + id,
+            url: "ajax_del/"+id,
             success: function(result) {
                 renderList();
             }
@@ -78,6 +99,29 @@
             data: formdata,
             success: function(result) {
                 renderList();
+            }
+        });
+        return false;
+    }
+
+    function update(data){
+        document.getElementById("updateCityForm").style.display="block";
+        document.getElementById("update_FullName").value=data.FullName;
+        document.getElementById("update_AdminEmail").value=data.AdminEmail;
+        document.getElementById("update_loginid").value=data.loginid;
+        document.getElementById("update_password").value=data.password;
+        document.getElementById("update_id").value=data.id;
+    }
+
+    function updateCity(){
+        var formdata = $("#updateCityForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax_update",
+            data: formdata,
+            success: function(result) {
+                renderList();
+                document.getElementById("updateCityForm").style.display="none";
             }
         });
         return false;

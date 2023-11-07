@@ -84,4 +84,26 @@ class Subject_model extends CI_Model {
             }
         }
 
+        function ajax_update(){
+            $this->load->database();
+            if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+                $subid = $_POST['subid'];
+                $cfull = $_POST['cfull'];
+                $sub1 = $_POST['sub1'];
+                $sub2 = $_POST['sub2'];
+                $sub3 = $_POST['sub3'];
+                $sub4 = $_POST['sub4'];
+                $dt_created = $_POST['dt_created'];
+                $update_date = $_POST['update_date'];
+    
+                $sql = "UPDATE subject SET cfull='$cfull', sub1='$sub1', sub2='$sub2', sub3='$sub3', sub4='$sub4', dt_created='$dt_created', update_date='$update_date' WHERE subid=$subid";
+            
+                if ($this->db->query($sql) === TRUE) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
 }

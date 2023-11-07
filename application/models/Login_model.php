@@ -77,5 +77,23 @@ class Login_model extends CI_Model {
                 return false;
             }
         }
+        function ajax_update(){
+            $this->load->database();
+            if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+                $id = $_POST['id'];
+                $FullName = $_POST['FullName'];
+                $AdminEmail = $_POST['AdminEmail'];
+                $loginid = $_POST['loginid'];
+                $password = $_POST['password'];
+    
+                $sql = "UPDATE tbl_login SET FullName='$FullName', AdminEmail='$AdminEmail', loginid='$loginid', password='$password' WHERE id=$id";
+            
+                if ($this->db->query($sql) === TRUE) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
 
 }

@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <h1>Country Form </h1>
+        <h1>Course Form </h1>
         <form name="myForm" method="post" id="createCityForm" onsubmit="return addCity();">
             <div class="mb-3">
                 <label for="cshort" class="form-label">Course Short</label>
@@ -25,6 +25,27 @@
                 <label for="cdate" class="form-label">Subject date</label>
                 <input type="date" class="form-control" id="cdate" name="cdate" placeholder="Enter Date">
             </div>
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <form name="myForm" method="post" id="updateCityForm" style="display:none" onsubmit="return updateCity();">
+            <div class="mb-3">
+                <label for="name" class="form-label">Course Short</label>
+                <input type="text" class="form-control" id="update_cshort" name="name" placeholder="Enter Course Name">
+            </div>
+            <div class="mb-3">
+                <label for="roll" class="form-label">Course Name</label>
+                <input type="text" class="form-control" id="update_cfull" name="sortname" placeholder="Enter Short Code">
+            </div>
+            <div class="mb-3">
+                <label for="roll" class="form-label">Subject date</label>
+                <input type="text" class="form-control" id="update_cdate" name="sortname" placeholder="Enter Short Code">
+            </div>
+            <div class="mb-3">
+                <label for="roll" class="form-label">Update date</label>
+                <input type="text" class="form-control" id="update_Update date" name="Update date" placeholder="Enter Short Code">
+            </div>
+            <input type="hidden" id="update_cid" name="cid" />
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
         </form>
         <table class="table">
@@ -55,9 +76,9 @@
         });
     }
 
-    function ajax_del(id) {
+    function ajax_del(cid) {
         $.ajax({
-            url: "ajax_del/" + id,
+            url: "ajax_del/"+cid,
             success: function(result) {
                 renderList();
             }
@@ -72,6 +93,29 @@
             data: formdata,
             success: function(result) {
                 renderList();
+            }
+        });
+        return false;
+    }
+
+    function update(data){
+        document.getElementById("updateCityForm").style.display="block";
+        document.getElementById("update_cshort").value=data.cshort;
+        document.getElementById("update_cfull").value=data.cfull;
+        document.getElementById("update_cdate").value=data.cdate;
+        document.getElementById("update_update_date").value=data.update_date;
+        document.getElementById("update_cid").value=data.cid;
+    }
+
+    function updateCity(){
+        var formdata = $("#updateCityForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax_update",
+            data: formdata,
+            success: function(result) {
+                renderList();
+                document.getElementById("updateCityForm").style.display="none";
             }
         });
         return false;

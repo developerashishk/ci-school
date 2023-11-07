@@ -43,7 +43,7 @@ class State extends CI_Controller {
             echo "<td>" . $row["id"] . "</td>";
             echo "<td>" . $row["name"] . "</td>";
             echo "<td>" . $row["country_id"] . "</td>";
-            echo "<td><a href='update?updateid=" . $row["id"] . "' class='btn btn-primary'>update</a></td>";
+            echo "<td><a onclick=update(" . json_encode($row) . "); class='btn btn-primary'>update</a></td>";
             echo "<td><a onclick=ajax_del(" . $row["id"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }
@@ -56,5 +56,9 @@ class State extends CI_Controller {
     function ajax_create(){
         $this->load->model('State_model');
         $this->State_model->create();
+    }
+    function ajax_update(){
+        $this->load->model('State_model');
+        $this->State_model->ajax_update();
     }
 }

@@ -72,5 +72,21 @@ class State_model extends CI_Model {
                 return false;
             }
         }
+        function ajax_update(){
+            $this->load->database();
+            if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+                $id = $_POST['id'];
+                $name = $_POST['name'];
+                $country_id = $_POST['country_id'];
+    
+                $sql = "UPDATE states SET name='$name', country_id='$country_id' WHERE id=$id";
+            
+                if ($this->db->query($sql) === TRUE) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
 
 }

@@ -44,7 +44,7 @@ class Course extends CI_Controller {
             echo "<td>" . $row["cfull"] . "</td>";
             echo "<td>" . $row["cdate"] . "</td>";
             echo "<td>" . $row["update_date"] . "</td>";
-            echo "<td><a href='update?updateid=" . $row["cid"] . "' class='btn btn-primary'>update</a></td>";
+            echo "<td><a onclick=update(" . json_encode($row) . "); class='btn btn-primary'>update</a></td>";
             echo "<td><a onclick=ajax_del(" . $row["cid"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }
@@ -57,5 +57,9 @@ class Course extends CI_Controller {
     function ajax_create(){
         $this->load->model('Course_model');
         $this->Course_model->create();
+    }
+    function ajax_update(){
+        $this->load->model('Course_model');
+        $this->Course_model->ajax_update();
     }
 }

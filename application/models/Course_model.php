@@ -80,5 +80,25 @@ class Course_model extends CI_Model {
                 return false;
             }
         }
+        
+    function ajax_update(){
+        $this->load->database();
+        if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+            $cid = $_POST['cid'];
+            $cshort = $_POST['cshort'];
+            $cfull = $_POST['cfull'];
+            $cdate = $_POST['cdate'];
+            $update_date = $_POST['update_date'];
+        
+
+            $sql = "UPDATE tbl_course SET cshort='$cshort', cfull='$cfull', cdate='$cdate', update_date='$update_date' WHERE cid=$cid";
+        
+            if ($this->db->query($sql) === TRUE) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
 }

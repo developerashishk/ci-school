@@ -16,7 +16,7 @@
         <input type="hidden" name="subid" value="<?php echo $subid; ?>">
         <div class="mb-3">
                 <label for="cshort" class="form-label">Course Short</label>
-                <input type="number" class="form-control" id="cshort" name="cshort" placeholder="Enter Course Short" value="<?php echo $cshort; ?>">
+                <input type="text" class="form-control" id="cshort" name="cshort" placeholder="Enter Course Short" value="<?php echo $cshort; ?>">
             </div>
             <div class="mb-3">
                 <label for="cfull" class="form-label">Country Name</label>

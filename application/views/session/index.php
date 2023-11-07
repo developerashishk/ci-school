@@ -29,6 +29,23 @@
             <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 
         </form>
+
+        <form name="myForm" method="post" id="updateCityForm" style="display:none" onsubmit="return updateCity();">
+            <div class="mb-3">
+                <label for="name" class="form-label">Session</label>
+                <input type="text" class="form-control" id="update_session" name="session" placeholder="Enter Session">
+            </div>
+            <div class="mb-3">
+                <label for="roll" class="form-label">Post Date</label>
+                <input type="text" class="form-control" id="update_postingdate" name="postingdate" placeholder="Post Date">
+            </div>
+            <div class="mb-3">
+                <label for="roll" class="form-label">Status</label>
+                <input type="text" class="form-control" id="update_status" name="status" placeholder="Status">
+            </div>
+            <input type="hidden" id="update_id" name="id" />
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
         <table class="table">
             <thead>
                 <tr>
@@ -46,7 +63,7 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <script>
+        <script>
     function renderList() {
         $.ajax({
             url: "ajax_records",
@@ -58,7 +75,7 @@
 
     function ajax_del(id) {
         $.ajax({
-            url: "ajax_del/" + id,
+            url: "ajax_del/"+id,
             success: function(result) {
                 renderList();
             }
@@ -73,6 +90,28 @@
             data: formdata,
             success: function(result) {
                 renderList();
+            }
+        });
+        return false;
+    }
+
+    function update(data){
+        document.getElementById("updateCityForm").style.display="block";
+        document.getElementById("update_session").value=data.session;
+        document.getElementById("update_postingdate").value=data.postingdate;
+        document.getElementById("update_status").value=data.status;
+        document.getElementById("update_id").value=data.id;
+    }
+
+    function updateCity(){
+        var formdata = $("#updateCityForm").serialize();
+        $.ajax({
+            type: "POST",
+            url: "ajax_update",
+            data: formdata,
+            success: function(result) {
+                renderList();
+                document.getElementById("updateCityForm").style.display="none";
             }
         });
         return false;

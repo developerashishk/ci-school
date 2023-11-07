@@ -76,4 +76,22 @@ class Session_model extends CI_Model {
             }
         }
 
+        function ajax_update(){
+            $this->load->database();
+        if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
+            $id = $_POST['id'];
+            $session = $_POST['session'];
+            $postingdate = $_POST['postingdate'];
+            $status = $_POST['status'];
+
+            $sql = "UPDATE session SET session='$session', postingdate='$postingdate', status='$status' WHERE id=$id";
+            
+                if ($this->db->query($sql) === TRUE) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        }
+
 }
