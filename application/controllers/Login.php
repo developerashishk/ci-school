@@ -46,7 +46,7 @@ class Login extends CI_Controller {
             echo "<td>" . $row["AdminEmail"] . "</td>";
             echo "<td>" . $row["loginid"] . "</td>";
             echo "<td>" . $row["password"] . "</td>";
-            echo "<td><a onclick=update(" . json_encode($row) . "); class='btn btn-primary'>update</a></td>";
+            echo "<td><a onclick=\"update(" . htmlspecialchars(json_encode($row)) . ");\" class='btn btn-primary'>update</a></td>";
             echo "<td><a onclick=ajax_del(" . $row["id"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }

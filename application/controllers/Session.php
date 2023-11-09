@@ -43,7 +43,7 @@ class Session extends CI_Controller {
             echo "<td>" . $row["session"] . "</td>";
             echo "<td>" . $row["postingdate"] . "</td>";
             echo "<td>" . $row["status"] . "</td>";
-            echo "<td><a onclick=update(" . json_encode($row) . "); class='btn btn-primary'>update</a></td>";
+            echo "<td><a onclick=\"update(" . htmlspecialchars(json_encode($row)) . ");\" class='btn btn-primary'>update</a></td>";
             echo "<td><a onclick=ajax_del(" . $row["id"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }

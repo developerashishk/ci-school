@@ -48,7 +48,7 @@ class Subject extends CI_Controller {
             echo "<td>" . $row["sub4"] . "</td>";
             echo "<td>" . $row["dt_created"] . "</td>";
             echo "<td>" . $row["update_date"] . "</td>";
-            echo "<td><a onclick=\"update(" . htmlspecialchars(json_encode($row)) . ");\" class='btn btn-primary'>Update</a></td>";
+            echo "<td><a onclick=\"update(" . htmlspecialchars(json_encode($row)) . ");\" class='btn btn-primary'>update</a></td>";
             echo "<td><a onclick=ajax_del(" . $row["subid"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }

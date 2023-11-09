@@ -44,7 +44,7 @@ class Course extends CI_Controller {
             echo "<td>" . $row["cfull"] . "</td>";
             echo "<td>" . $row["cdate"] . "</td>";
             echo "<td>" . $row["update_date"] . "</td>";
-            echo "<td><a onclick=update(" . json_encode($row) . "); class='btn btn-primary'>update</a></td>";
+            echo "<td><a onclick=\"update(" . htmlspecialchars(json_encode($row)) . ");\" class='btn btn-primary'>update</a></td>";
             echo "<td><a onclick=ajax_del(" . $row["cid"] . "); class='btn btn-danger'>Delete</a></td>";
             echo "</tr>";
         }
