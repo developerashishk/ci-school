@@ -168,6 +168,7 @@
     }
 
     function ajax_del(subid) {
+        if (confirm("Are you sure?") == false) {return}
         $.ajax({
             url: "ajax_del/" + subid,
             success: function(result) {

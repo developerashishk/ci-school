@@ -132,6 +132,7 @@
     }
 
     function ajax_del(id) {
+        if (confirm("Are you sure?") == false) {return}
         $.ajax({
             url: "ajax_del/" + id,
             success: function(result) {
