@@ -73,7 +73,7 @@ class Course_model extends CI_Model {
     function ajax_del($cid){
         $this->load->database();
         // sql to delete a record
-        $sql = "DELETE FROM tbl_course WHERE id=$cid";
+        $sql = "DELETE FROM tbl_course WHERE cid=$cid";
         if ($this->db->query($sql) === TRUE) {
                     return true;
             } else {
