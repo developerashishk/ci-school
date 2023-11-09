@@ -176,6 +176,7 @@
         });
     }
 
+  
     function addCity() {
         var formdata = $("#createCityForm").serialize();
         $.ajax({
@@ -184,13 +185,15 @@
             data: formdata,
             success: function(result) {
                 renderList();
+                document.getElementById("createCityForm").reset();
+                add_modal.hide();
             }
         });
         return false;
     }
 
     function update(data) {
-        new bootstrap.Modal(document.getElementById('editModal')).show();
+        edit_modal.show();
         // document.getElementById("updateCityForm").style.display="block";
         document.getElementById("update_cfull").value = data.cfull;
         document.getElementById("update_sub1").value = data.sub1;
@@ -208,15 +211,18 @@
             data: formdata,
             success: function(result) {
                 renderList();
-                new bootstrap.Modal(document.getElementById('editModal')).hide();
+                edit_modal.hide();
                 // document.getElementById("updateCityForm").style.display="none";
             }
         });
         return false;
     }
-
+    var add_modal = null;
+    var edit_modal = null;
     $(document).ready(function() {
         renderList();
+        add_modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        edit_modal = new bootstrap.Modal(document.getElementById('editModal'));
     });
     </script>
 </body>

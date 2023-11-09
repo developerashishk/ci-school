@@ -117,13 +117,15 @@
             data: formdata,
             success: function(result) {
                 renderList();
+                document.getElementById("createCityForm").reset();
+                add_modal.hide();
             }
         });
         return false;
     }
 
     function update(data) {
-        new bootstrap.Modal(document.getElementById('editModal')).show();
+        edit_modal.show();
         // document.getElementById("updateCityForm").style.display="block";
         document.getElementById("update_name").value = data.name;
         document.getElementById("update_id").value = data.id;
@@ -137,15 +139,18 @@
             data: formdata,
             success: function(result) {
                 renderList();
-                new bootstrap.Modal(document.getElementById('editModal')).hide();
+                edit_modal.hide();
                 // document.getElementById("updateCityForm").style.display="none";
             }
         });
         return false;
     }
-
+    var add_modal = null;
+    var edit_modal = null;
     $(document).ready(function() {
         renderList();
+        add_modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        edit_modal = new bootstrap.Modal(document.getElementById('editModal'));
     });
     </script>
 </body>
