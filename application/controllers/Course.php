@@ -1,8 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+session_start();
 class Course extends CI_Controller {
     function index(){
+        if(!isset($_SESSION['login']) && $_SESSION['login']!==true ){
+            $url=base_url("Auth");
+            header("Location: $url");
+            }
         $this->load->view("course/index");
     }
     function create(){
