@@ -271,22 +271,40 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
+            <li class="nav-item">
+                <a href="<?php echo base_url('/dashboard/City'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Simple Tables</p>
+                  <p>City DataTables</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/data.html" class="nav-link">
+                <a href="<?php echo base_url('/dashboard/Country'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>DataTables</p>
+                  <p>Country DataTables</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/tables/jsgrid.html" class="nav-link">
+                <a href="<?php echo base_url('/dashboard/Course'); ?>" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>jsGrid</p>
+                  <p>Course DataTables</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('/dashboard/Session'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Session DataTables</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('/dashboard/State'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>State DataTables</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo base_url('/dashboard/Subject'); ?>" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Subject DataTables</p>
                 </a>
               </li>
             </ul>

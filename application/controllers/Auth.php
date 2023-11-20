@@ -11,15 +11,16 @@ class Auth extends CI_Controller {
         $name=$_POST["username"];
         $pass=$_POST["password"];
 
-        if($name == 'Ashish' && $pass == '12345'){
+        if($name == 'Admin' && $pass == '12345'){
             $_SESSION['login']=true;
-            $url=base_url("city/");
+            $url=base_url("dashboard/");
             header("Location: $url");
 
         }else{
-            echo "<h1>Try Again</h1>";
+            echo '<script type="text/javascript">';
+            echo ' alert("JavaScript Alert Box by PHP")';  //not showing an alert box.
+            echo '</script>';
         }
-         echo "<h1>$name</h1>";
     }
 
     function logout (){

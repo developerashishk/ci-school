@@ -4,7 +4,7 @@ session_start();
 class City extends CI_Controller {
 
     function index(){
-        if(!isset($_SESSION['login']) && $_SESSION['login']!==true ){
+        if(!isset($_SESSION['city']) && $_SESSION['city']!==true ){
         $url=base_url("Auth");
         header("Location: $url");
         }

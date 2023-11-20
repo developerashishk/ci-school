@@ -19,7 +19,7 @@
                         <h2 class="p-3">Login</h2>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="/ci-school/index.php/Auth/login">
+                        <form method="post" action="/ci-school/Auth/login">
                             <div class="mb-4">
                                 <label for="username" class="form-label">Username/Email</label>
                                 <input type="text" class="form-control" name="username" id="username" />
