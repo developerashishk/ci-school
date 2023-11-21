@@ -38,10 +38,15 @@ class State extends CI_Controller {
         $this->load->model('State_model');
         $this->State_model->del();
     }
-    
     function ajax_records(){
         $this->load->model('State_model');
         $records=$this->State_model->records();
+        $data=array(
+            'status'=>200,
+            'records'=>$records
+        );
+        echo json_encode($data);
+        return;
         foreach ($records as $row) {
             echo "<tr>";
             echo "<td>" . $row["id"] . "</td>";
@@ -52,6 +57,7 @@ class State extends CI_Controller {
             echo "</tr>";
         }
     }
+    
     function ajax_del($id){
         $this->load->model('State_model');
         $this->State_model->ajax_del($id);

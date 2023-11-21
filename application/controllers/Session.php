@@ -38,9 +38,16 @@ class Session extends CI_Controller {
         $this->load->model('Session_model');
         $this->Session_model->del();
     }
+ 
     function ajax_records(){
         $this->load->model('Session_model');
         $records=$this->Session_model->records();
+        $data=array(
+            'status'=>200,
+            'records'=>$records
+        );
+        echo json_encode($data);
+        return;
         foreach ($records as $row) {
             echo "<tr>";
             echo "<td>" . $row["id"] . "</td>";

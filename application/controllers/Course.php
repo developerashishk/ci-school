@@ -38,9 +38,16 @@ class Course extends CI_Controller {
         $this->Course_model->del();
     }
     
+   
     function ajax_records(){
         $this->load->model('Course_model');
         $records=$this->Course_model->records();
+        $data=array(
+            'status'=>200,
+            'records'=>$records
+        );
+        echo json_encode($data);
+        return;
         foreach ($records as $row) {
             echo "<tr>";
             echo "<td>" . $row["cid"] . "</td>";

@@ -37,10 +37,15 @@ class Subject extends CI_Controller {
         $this->load->model('Subject_model');
         $this->Subject_model->del();
     }
-    
     function ajax_records(){
         $this->load->model('Subject_model');
         $records=$this->Subject_model->records();
+        $data=array(
+            'status'=>200,
+            'records'=>$records
+        );
+        echo json_encode($data);
+        return;
         foreach ($records as $row) {
             echo "<tr>";
             echo "<td>" . $row["subid"] . "</td>";

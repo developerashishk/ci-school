@@ -202,14 +202,32 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 <script>
-function renderList() {
+    function renderList() {
     $.ajax({
         url: "<?php echo base_url("/subject/ajax_records"); ?>",
         success: function(result) {
-            $("#records").html(result);
+            result=JSON.parse(result);
+            var recordHTML="";
+            result.records.forEach(function(row) {
+                    recordHTML += `<tr>
+                        <td>${row.subid}</td>
+                        <td>${row.cshort}</td>
+                        <td>${row.cfull}</td>
+                        <td>${row.sub1}</td>
+                        <td>${row.sub2}</td>
+                        <td>${row.sub3}</td>
+                        <td>${row.sub4}</td>
+                        <td>${row.dt_created}</td>
+                        <td>${row.update_date}</td>
+                        <td><a onclick='update(${JSON.stringify(row)})' class="btn btn-primary">Update</a></td>
+                        <td><a onclick='ajax_del(${row.subid})' class="btn btn-danger">Delete</a></td>
+                    </tr>`;
+                });
+            $("#records").html(recordHTML);
         }
     });
 }
+
 
 function ajax_del(id) {
     if (confirm("Are you sure?") == false) {

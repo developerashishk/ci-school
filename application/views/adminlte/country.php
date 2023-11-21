@@ -153,11 +153,23 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 <script>
+
 function renderList() {
     $.ajax({
         url: "<?php echo base_url("/country/ajax_records"); ?>",
         success: function(result) {
-            $("#records").html(result);
+            result=JSON.parse(result);
+            var recordHTML="";
+            result.records.forEach(function(row) {
+                    recordHTML += `<tr>
+                        <td>${row.id}</td>
+                        <td>${row.name}</td>
+                        <td>${row.sortname}</td>
+                        <td><a onclick='update(${JSON.stringify(row)})' class="btn btn-primary">Update</a></td>
+                        <td><a onclick='ajax_del(${row.id})' class="btn btn-danger">Delete</a></td>
+                    </tr>`;
+                });
+            $("#records").html(recordHTML);
         }
     });
 }

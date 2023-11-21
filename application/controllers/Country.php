@@ -39,10 +39,15 @@ class Country extends CI_Controller {
         $this->load->model('Country_model');
         $this->Country_model->del();
     }
-
     function ajax_records(){
         $this->load->model('Country_model');
         $records=$this->Country_model->records();
+        $data=array(
+            'status'=>200,
+            'records'=>$records
+        );
+        echo json_encode($data);
+        return;
         foreach ($records as $row) {
             echo "<tr>";
             echo "<td>" . $row["id"] . "</td>";
@@ -53,6 +58,8 @@ class Country extends CI_Controller {
             echo "</tr>";
         }
     }
+
+   
     function ajax_del($id){
         $this->load->model('Country_model');
         $this->Country_model->ajax_del($id);
