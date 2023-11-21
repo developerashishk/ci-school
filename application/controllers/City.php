@@ -43,6 +43,12 @@ class City extends CI_Controller {
     function ajax_records(){
         $this->load->model('City_model');
         $records=$this->City_model->records();
+        $data=array(
+            'status'=>200,
+            'records'=>$records
+        );
+        echo json_encode($data);
+        return;
         foreach ($records as $row) {
             echo "<tr>";
             echo "<td>" . $row["id"] . "</td>";
