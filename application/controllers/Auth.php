@@ -18,7 +18,7 @@ class Auth extends CI_Controller {
 
         }else{
             echo '<script type="text/javascript">';
-            echo ' alert("JavaScript Alert Box by PHP")';  //not showing an alert box.
+            echo ' alert("Invalid Details")';  //not showing an alert box.
             echo '</script>';
         }
     }
