@@ -3,12 +3,11 @@ class City_model extends CI_Model {
 
     function create(){
         $name = $_POST['name'];
-        $state_id = $_POST['state_id'];
     
-        $sql = "INSERT INTO cities (name, state_id) VALUES ('$name', '$state_id' )";
+        $sql = "INSERT INTO cities (name) VALUES ('$name' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
-            header("Location: display");
+            // header("Location: display");
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->error();
         }
