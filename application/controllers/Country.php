@@ -65,8 +65,21 @@ class Country extends CI_Controller {
         $this->Country_model->ajax_del($id);
     }
     function ajax_create(){
-        $this->load->model('Country_model');
-        $this->Country_model->create();
+        $data=[];
+        if(empty($_POST['name']) || empty($_POST['sortname']) || is_numeric($_POST['name'])){
+            $data=array(
+                'status'=>false,
+                'msg'=>"Mandatory fields or numbers are not allowed!!"
+            );
+        }else{
+            $data=array(
+                'status'=>true,
+                'msg'=>"Record Created Sucessfully!!"
+            );
+            $this->load->model('Country_model');
+            $this->Country_model->create();
+        }
+        echo json_encode($data); 
     }
     
     function ajax_update(){

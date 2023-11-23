@@ -9,7 +9,7 @@ class Session_model extends CI_Model {
         $sql = "INSERT INTO session (session, postingdate, status) VALUES ('$session', '$postingdate', '$status' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
-            header("Location: display");
+           // header("Location: display");
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->error();
         }

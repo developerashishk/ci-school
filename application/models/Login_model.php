@@ -10,7 +10,7 @@ class Login_model extends CI_Model {
         $sql = "INSERT INTO tbl_login (FullName, AdminEmail, loginid, password) VALUES ('$FullName', '$AdminEmail','$loginid', '$password' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
-            header("Location: display");
+          //  header("Location: display");
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->error();
         }

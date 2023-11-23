@@ -6,13 +6,10 @@ class Course_model extends CI_Model {
         $cfull = $_POST['cfull'];
         $cdate = $_POST['cdate'];
         $update_date = $_POST['update_date'];
-        
-        
-    
         $sql = "INSERT INTO tbl_course (cshort, cfull, cdate, update_date) VALUES ('$cshort', '$cfull', '$cdate', '$update_date' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
-            header("Location: display");
+          //  header("Location: display");
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->error();
         }

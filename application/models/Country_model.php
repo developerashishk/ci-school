@@ -8,7 +8,7 @@ class Country_model extends CI_Model {
         $sql = "INSERT INTO countries (name, sortname) VALUES ('$name', '$sortname' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
-            header("Location: display");
+          //  header("Location: display");
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->error();
         }

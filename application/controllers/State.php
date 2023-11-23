@@ -64,8 +64,21 @@ class State extends CI_Controller {
     }
 
     function ajax_create(){
-        $this->load->model('State_model');
-        $this->State_model->create();
+        $data=[];
+        if(empty($_POST['name']) || is_numeric($_POST['name'])){
+            $data=array(
+                'status'=>false,
+                'msg'=>"Mandatory fields or numbers are not allowed!!"
+            );
+        }else{
+            $data=array(
+                'status'=>true,
+                'msg'=>"Record Created Sucessfully!!"
+            );
+            $this->load->model('State_model');
+            $this->State_model->create();
+        }
+        echo json_encode($data); 
     }
     function ajax_update(){
         $this->load->model('State_model');

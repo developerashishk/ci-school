@@ -64,9 +64,23 @@ class Session extends CI_Controller {
         $this->Session_model->ajax_del($id);
     }
 
+  
     function ajax_create(){
-        $this->load->model('Session_model');
-        $this->Session_model->create();
+        $data=[];
+        if(empty($_POST['session']) || empty($_POST['postingdate']) || empty($_POST['status'])){
+            $data=array(
+                'status'=>false,
+                'msg'=>"Mandatory fields or numbers are not allowed!!"
+            );
+        }else{
+            $data=array(
+                'status'=>true,
+                'msg'=>"Record Created Sucessfully!!"
+            );
+            $this->load->model('Session_model');
+            $this->Session_model->create();
+        }
+        echo json_encode($data); 
     }
     function ajax_update(){
         $this->load->model('Session_model');

@@ -8,7 +8,7 @@ class State_model extends CI_Model {
         $sql = "INSERT INTO states (name, country_id) VALUES ('$name', '$country_id' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
-            header("Location: display");
+          //  header("Location: display");
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->error();
         }

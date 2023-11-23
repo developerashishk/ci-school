@@ -69,8 +69,21 @@ class Subject extends CI_Controller {
     }
 
     function ajax_create(){
-        $this->load->model('Subject_model');
-        $this->Subject_model->create();
+        $data=[];
+        if(empty($_POST['cshort']) || empty($_POST['cfull']) || empty($_POST['sub1']) || empty($_POST['sub2']) || empty($_POST['sub3']) || empty($_POST['sub4'])){
+            $data=array(
+                'status'=>false,
+                'msg'=>"Mandatory fields or numbers are not allowed!!"
+            );
+        }else{
+            $data=array(
+                'status'=>true,
+                'msg'=>"Record Created Sucessfully!!"
+            );
+            $this->load->model('Subject_model');
+            $this->Subject_model->create();
+        }
+        echo json_encode($data); 
     }
     
     function ajax_update(){

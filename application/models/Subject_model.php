@@ -13,7 +13,7 @@ class Subject_model extends CI_Model {
         $sql = "INSERT INTO subject (cfull, sub1, sub2, sub3, sub4, dt_created) VALUES ('$cfull', '$sub1', '$sub2', '$sub3', '$sub4', '$dt_created' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
-            header("Location: display");
+         //   header("Location: display");
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->error();
         }
