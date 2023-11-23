@@ -14,6 +14,8 @@ class Login_model extends CI_Model {
         } else {
             echo "Error: " . $sql . "<br>" . $this->db->error();
         }
+        $url=base_url("Auth");
+        header("Location: $url");
     }
 
     function records(){
