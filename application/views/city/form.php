@@ -26,7 +26,7 @@
 
                     <form method="post" action="/ci-school/Auth/login">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Email" />
+                            <input type="text" class="form-control" name="loginid" id="loginid" placeholder="Username" />
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-envelope"></span>

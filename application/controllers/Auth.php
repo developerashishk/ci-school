@@ -8,20 +8,27 @@ class Auth extends CI_Controller {
     }
 
     function login(){
-        $name=$_POST["username"];
-        $pass=$_POST["password"];
-
-        if($name == 'Admin' && $pass == '12345'){
-            $_SESSION['login']=true;
-            $url=base_url("dashboard/");
+        $name = $this->input->post("loginid");
+        $pass = $this->input->post("password");
+    
+        // Load the database library
+        $this->load->database();
+    
+        // Query the database to check the credentials
+        $query = $this->db->get_where('tbl_login', array('loginid' => $name, 'password' => $pass));
+        $user = $query->row();
+    
+        if ($user) {
+            $_SESSION['login'] = true;
+            $url = base_url("dashboard/");
             header("Location: $url");
-
-        }else{
+        } else {
             echo '<script type="text/javascript">';
-            echo ' alert("Invalid Details")';  //not showing an alert box.
+            echo 'alert("Invalid Details")';  
             echo '</script>';
         }
     }
+    
 
     function logout (){
         session_destroy();
