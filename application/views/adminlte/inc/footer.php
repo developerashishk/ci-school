@@ -24,6 +24,10 @@
 </script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url();?>assets/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="<?php echo base_url();?>assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url();?>assets/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?php echo base_url();?>assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <!-- ChartJS -->
 <script src="<?php echo base_url();?>assets/adminlte/plugins/chart.js/Chart.min.js"></script>
 <!-- Sparkline -->
