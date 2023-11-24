@@ -15,8 +15,13 @@ class City_model extends CI_Model {
 
     function records(){
         $this->load->database();
-        $sql = "SELECT * FROM cities ORDER BY ID DESC LIMIT 10";
+        $sql = "SELECT * FROM cities ORDER BY ID DESC LIMIT 100";
         $result = $this->db->query($sql)->result_array();
+        // Loop through each item in the $result array
+        foreach ($result as &$item) {
+            $item['update'] = "<a onclick=update(" . json_encode($item) . "); class='btn btn-primary'>update</a>";
+            $item['del'] = "<a onclick=ajax_del(" . $item["id"] . "); class='btn btn-danger'>Delete</a>"; 
+        }
         return $result;
     }
 
