@@ -44,27 +44,6 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="<?php echo base_url('/dashboard'); ?>" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?php echo base_url('/dashboard/City'); ?>" class="nav-link">City</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?php echo base_url('/dashboard/Country'); ?>" class="nav-link">Country</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?php echo base_url('/dashboard/Course'); ?>" class="nav-link">Course</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?php echo base_url('/dashboard/Session'); ?>" class="nav-link">Session</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?php echo base_url('/dashboard/State'); ?>" class="nav-link">State</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="<?php echo base_url('/dashboard/Subject'); ?>" class="nav-link">Subject</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-      <a href="<?php echo base_url('Auth/logout'); ?>" type="button" class=" nav-link text-light font-weight-bold btn btn-primary">Logout</a>
-      </li>
     </ul>
     
     <!-- Right navbar links -->
