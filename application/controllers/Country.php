@@ -1,75 +1,76 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-session_start();
+
 class Country extends CI_Controller {
 
-    function index(){
-        if(!isset($_SESSION['login']) && $_SESSION['login']!==true ){
-            $url=base_url("Auth");
+    public function __construct() {
+        parent::__construct();
+        session_start();
+    }
+
+    public function index() {
+        if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+            $url = base_url("Auth");
             header("Location: $url");
-            }
+            exit(); // Terminate script after redirect
+        }
         $this->load->view("country/index");
     }
 
-    function create(){
-        if (isset($_POST['submit'])) {
+    public function create() {
+        if ($this->input->post('submit')) {
             $this->load->model('Country_model');
             $this->Country_model->create();
         }
         $this->load->view("country/create");
     }
 
-    function display(){
+    public function display() {
         $this->load->model('Country_model');
-        $abc=$this->Country_model->records();
-        $data=[];
-        $data['records']=$abc;
-        $this->load->view("country/display",$data);
+        $abc = $this->Country_model->records();
+        $data['records'] = $abc;
+        $this->load->view("country/display", $data);
     }
 
-    function update(){
+    public function update() {
         $this->load->model('Country_model');
         $this->Country_model->update();
-        $details=$this->Country_model->getRecord();
-        $data=$details;
-        $this->load->view("country/update",$data);
+        $details = $this->Country_model->getRecord();
+        $data['details'] = $details; // Use an array to pass data to the view
+        $this->load->view("country/update", $data);
     }
 
-    function delete(){
+    public function delete() {
         $this->load->model('Country_model');
         $this->Country_model->del();
     }
-    function ajax_records(){
+
+    public function ajax_records() {
         $this->load->model('Country_model');
-        $records=$this->Country_model->records();
-        $data=array(
-            'status'=>200,
-            'records'=>$records
-        );
+        $records = $this->Country_model->records();
+        $data = [
+            'status' => 200,
+            'records' => $records
+        ];
         echo json_encode($data);
         return;
-        foreach ($records as $row) {
-            echo "<tr>";
-            echo "<td>" . $row["id"] . "</td>";
-            echo "<td>" . $row["name"] . "</td>";
-            echo "<td>" . $row["sortname"] . "</td>";
-            echo "<td><a onclick=\"update(" . htmlspecialchars(json_encode($row)) . ");\" class='btn btn-primary'>update</a></td>";
-            echo "<td><a onclick=ajax_del(" . $row["id"] . "); class='btn btn-danger'>Delete</a></td>";
-            echo "</tr>";
-        }
     }
 
-   
-    function ajax_del($id){
+    public function ajax_del($id) {
         $this->load->model('Country_model');
         $this->Country_model->ajax_del($id);
     }
+
     function ajax_create(){
         $data=[];
-        if(empty($_POST['name']) || empty($_POST['sortname']) || is_numeric($_POST['name'])){
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('sortname', 'sortname', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
             $data=array(
                 'status'=>false,
-                'msg'=>"Mandatory fields or numbers are not allowed!!"
+                'msg'=>json_encode($this->form_validation->error_array())
             );
         }else{
             $data=array(
@@ -81,35 +82,9 @@ class Country extends CI_Controller {
         }
         echo json_encode($data); 
     }
-    
-    function ajax_update(){
+
+    public function ajax_update() {
         $this->load->model('Country_model');
         $this->Country_model->ajax_update();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,7 +12,7 @@ class City extends CI_Controller {
     }
 
     function create(){
-        if (isset($_POST['submit'])) {
+        if ($this->input->post('submit')) {
             $this->load->model('City_model');
             $this->City_model->create();
         }

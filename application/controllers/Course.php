@@ -10,7 +10,7 @@ class Course extends CI_Controller {
         $this->load->view("course/index");
     }
     function create(){
-        if (isset($_POST['submit'])) {
+        if ($this->input->post('submit')) {
             $this->load->model('Course_model');
             $this->Course_model->create();
         }
@@ -66,8 +66,26 @@ class Course extends CI_Controller {
     }
 
     function ajax_create(){
-        $this->load->model('Course_model');
-        $this->Course_model->create();
+        $data=[];
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('cshort', 'cshort', 'required');
+        $this->form_validation->set_rules('cfull', 'cfull', 'required');
+        $this->form_validation->set_rules('cdate', 'cdate', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
+            $data=array(
+                'status'=>false,
+                'msg'=>json_encode($this->form_validation->error_array())
+            );
+        }else{
+            $data=array(
+                'status'=>true,
+                'msg'=>"Record Created Sucessfully!!"
+            );
+            $this->load->model('Course_model');
+            $this->Course_model->create();
+        }
+        echo json_encode($data); 
     }
     function ajax_update(){
         $this->load->model('Course_model');

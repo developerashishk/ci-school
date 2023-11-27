@@ -11,7 +11,7 @@ class Session extends CI_Controller {
         $this->load->view("session/index");
     }
     function create(){
-        if (isset($_POST['submit'])) {
+        if ($this->input->post('submit')) {
             $this->load->model('Session_model');
             $this->Session_model->create();
         }
@@ -67,10 +67,15 @@ class Session extends CI_Controller {
   
     function ajax_create(){
         $data=[];
-        if(empty($_POST['session']) || empty($_POST['postingdate']) || empty($_POST['status'])){
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('session', 'session', 'required');
+        $this->form_validation->set_rules('postingdate', 'postingdate', 'required');
+        $this->form_validation->set_rules('status', 'status', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
             $data=array(
                 'status'=>false,
-                'msg'=>"Mandatory fields or numbers are not allowed!!"
+                'msg'=>json_encode($this->form_validation->error_array())
             );
         }else{
             $data=array(

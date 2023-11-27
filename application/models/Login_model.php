@@ -2,10 +2,10 @@
 class Login_model extends CI_Model {
 
     function create(){
-        $FullName = $_POST['FullName'];
-        $AdminEmail = $_POST['AdminEmail'];
-        $loginid = $_POST['loginid'];
-        $password = $_POST['password'];
+        $FullName = $this->input->post('FullName');
+        $AdminEmail = $this->input->post('AdminEmail');
+        $loginid = $this->input->post('loginid');
+        $password = $this->input->post('password');
     
         $sql = "INSERT INTO tbl_login (FullName, AdminEmail, loginid, password) VALUES ('$FullName', '$AdminEmail','$loginid', '$password' )";
         $this->load->database();
@@ -40,12 +40,12 @@ class Login_model extends CI_Model {
 
     function update(){
         $this->load->database();
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-            $id = $_POST['id'];
-            $FullName = $_POST['FullName'];
-            $AdminEmail = $_POST['AdminEmail'];
-            $loginid = $_POST['loginid'];
-            $password = $_POST['password'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && $this->input->post('submit')) {
+            $id = $this->input->post('id');
+            $FullName = $this->input->post('FullName');
+            $AdminEmail = $this->input->post('AdminEmail');
+            $loginid = $this->input->post('loginid');
+            $password = $this->input->post('password');
 
             $sql = "UPDATE tbl_login SET FullName='$FullName', AdminEmail='$AdminEmail', loginid='$loginid', password='$password' WHERE id=$id";
         
@@ -87,11 +87,11 @@ class Login_model extends CI_Model {
         function ajax_update(){
             $this->load->database();
             if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
-                $id = $_POST['id'];
-                $FullName = $_POST['FullName'];
-                $AdminEmail = $_POST['AdminEmail'];
-                $loginid = $_POST['loginid'];
-                $password = $_POST['password'];
+                $id = $this->input->post('id');
+                $FullName = $this->input->post('FullName');
+                $AdminEmail = $this->input->post('AdminEmail');
+                $loginid = $this->input->post('loginid');
+                $password = $this->input->post('password');
     
                 $sql = "UPDATE tbl_login SET FullName='$FullName', AdminEmail='$AdminEmail', loginid='$loginid', password='$password' WHERE id=$id";
             

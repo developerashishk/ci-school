@@ -2,12 +2,12 @@
 class Subject_model extends CI_Model {
 
     function create(){
-        $cfull = $_POST['cfull'];
-        $sub1 = $_POST['sub1'];
-        $sub2 = $_POST['sub2'];
-        $sub3 = $_POST['sub3'];
-        $sub4 = $_POST['sub4'];
-        $dt_created = $_POST['dt_created'];
+        $cfull = $this->input->post('cfull');
+        $sub1 = $this->input->post('sub1');
+        $sub2 = $this->input->post('sub2');
+        $sub3 = $this->input->post('sub3');
+        $sub4 = $this->input->post('sub4');
+        $dt_created = $this->input->post('dt_created');
         $sql = "INSERT INTO subject (cfull, sub1, sub2, sub3, sub4, dt_created) VALUES ('$cfull', '$sub1', '$sub2', '$sub3', '$sub4', '$dt_created' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
@@ -39,15 +39,15 @@ class Subject_model extends CI_Model {
 
     function update(){
         $this->load->database();
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-            $subid = $_POST['subid'];
-            $cfull = $_POST['cfull'];
-            $sub1 = $_POST['sub1'];
-            $sub2 = $_POST['sub2'];
-            $sub3 = $_POST['sub3'];
-            $sub4 = $_POST['sub4'];
-            $dt_created = $_POST['dt_created'];
-            $update_date = $_POST['update_date'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && $this->input->post('submit')) {
+            $subid = $this->input->post('subid');
+            $cfull = $this->input->post('cfull');
+            $sub1 = $this->input->post('sub1');
+            $sub2 = $this->input->post('sub2');
+            $sub3 = $this->input->post('sub3');
+            $sub4 = $this->input->post('sub4');
+            $dt_created = $this->input->post('dt_created');
+            $update_date = $this->input->post('update_date');
 
             $sql = "UPDATE subject SET cfull='$cfull', sub1='$sub1', sub2='$sub2', sub3='$sub3', sub4='$sub4', dt_created='$dt_created', update_date='$update_date' WHERE subid=$subid";
         
@@ -90,14 +90,14 @@ class Subject_model extends CI_Model {
         function ajax_update(){
             $this->load->database();
             if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
-                $subid = $_POST['subid'];
-                $cfull = $_POST['cfull'];
-                $sub1 = $_POST['sub1'];
-                $sub2 = $_POST['sub2'];
-                $sub3 = $_POST['sub3'];
-                $sub4 = $_POST['sub4'];
-                $dt_created = $_POST['dt_created'];
-                $update_date = $_POST['update_date'];
+                $subid = $this->input->post('subid');
+                $cfull = $this->input->post('cfull');
+                $sub1 = $this->input->post('sub1');
+                $sub2 = $this->input->post('sub2');
+                $sub3 = $this->input->post('sub3');
+                $sub4 = $this->input->post('sub4');
+                $dt_created = $this->input->post('dt_created');
+                $update_date = $this->input->post('update_date');
     
                 $sql = "UPDATE subject SET cfull='$cfull', sub1='$sub1', sub2='$sub2', sub3='$sub3', sub4='$sub4', dt_created='$dt_created', update_date='$update_date' WHERE subid=$subid";
             

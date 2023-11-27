@@ -2,10 +2,10 @@
 class Course_model extends CI_Model {
 
     function create(){
-        $cshort = $_POST['cshort'];
-        $cfull = $_POST['cfull'];
-        $cdate = $_POST['cdate'];
-        $update_date = $_POST['update_date'];
+        $cshort = $this->input->post('cshort');
+        $cfull = $this->input->post('cfull');
+        $cdate = $this->input->post('cdate');
+        $update_date = $this->input->post('update_date');
         $sql = "INSERT INTO tbl_course (cshort, cfull, cdate, update_date) VALUES ('$cshort', '$cfull', '$cdate', '$update_date' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
@@ -37,12 +37,12 @@ class Course_model extends CI_Model {
 
     function update(){
         $this->load->database();
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-            $cid = $_POST['cid'];
-            $cshort = $_POST['cshort'];
-            $cfull = $_POST['cfull'];
-            $cdate = $_POST['cdate'];
-            $update_date = $_POST['update_date'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && $this->input->post('submit')) {
+            $cid = $this->input->post('cid');
+            $cshort = $this->input->post('cshort');
+            $cfull = $this->input->post('cfull');
+            $cdate = $this->input->post('cdate');
+            $update_date = $this->input->post('update_date');
         
 
             $sql = "UPDATE tbl_course SET cshort='$cshort', cfull='$cfull', cdate='$cdate', update_date='$update_date' WHERE cid=$cid";
@@ -86,11 +86,11 @@ class Course_model extends CI_Model {
     function ajax_update(){
         $this->load->database();
         if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
-            $cid = $_POST['cid'];
-            $cshort = $_POST['cshort'];
-            $cfull = $_POST['cfull'];
-            $cdate = $_POST['cdate'];
-            $update_date = $_POST['update_date'];
+            $cid = $this->input->post('cid');
+            $cshort = $this->input->post('cshort');
+            $cfull = $this->input->post('cfull');
+            $cdate = $this->input->post('cdate');
+            $update_date = $this->input->post('update_date');
         
 
             $sql = "UPDATE tbl_course SET cshort='$cshort', cfull='$cfull', cdate='$cdate', update_date='$update_date' WHERE cid=$cid";

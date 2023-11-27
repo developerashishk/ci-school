@@ -2,8 +2,8 @@
 class Country_model extends CI_Model {
 
     function create(){
-        $name = $_POST['name'];
-        $sortname = $_POST['sortname'];
+        $name = $this->input->post('name');
+        $sortname = $this->input->post('sortname');
     
         $sql = "INSERT INTO countries (name, sortname) VALUES ('$name', '$sortname' )";
         $this->load->database();
@@ -37,10 +37,10 @@ class Country_model extends CI_Model {
 
     function update(){
         $this->load->database();
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $sortname = $_POST['sortname'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && $this->input->post('submit')) {
+            $id = $this->input->post('id');
+            $name = $this->input->post('name');
+            $sortname = $this->input->post('sortname');
 
             $sql = "UPDATE countries SET name='$name', sortname='$sortname' WHERE id=$id";
         
@@ -83,9 +83,9 @@ class Country_model extends CI_Model {
     function ajax_update(){
         $this->load->database();
         if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $sortname = $_POST['sortname'];
+            $id = $this->input->post('id');
+            $name = $this->input->post('name');
+            $sortname = $this->input->post('sortname');
 
             $sql = "UPDATE countries SET name='$name', sortname='$sortname' WHERE id=$id";
         

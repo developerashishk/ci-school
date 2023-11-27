@@ -12,7 +12,7 @@ class Login extends CI_Controller {
     }
 
     function create(){
-        if (isset($_POST['submit'])) {
+        if ($this->input->post('submit')) {
             $this->load->model('Login_model');
             $this->Login_model->create();
         }

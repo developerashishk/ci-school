@@ -2,9 +2,9 @@
 class Session_model extends CI_Model {
 
     function create(){
-        $session = $_POST['session'];
-        $postingdate = $_POST['postingdate'];
-        $status = $_POST['status'];
+        $session = $this->input->post('session');
+        $postingdate = $this->input->post('postingdate');
+        $status = $this->input->post('status');
         $sql = "INSERT INTO session (session, postingdate, status) VALUES ('$session', '$postingdate', '$status' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
@@ -36,11 +36,11 @@ class Session_model extends CI_Model {
 
     function update(){
         $this->load->database();
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-            $id = $_POST['id'];
-            $session = $_POST['session'];
-            $postingdate = $_POST['postingdate'];
-            $status = $_POST['status'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && $this->input->post('submit')) {
+            $id = $this->input->post('id');
+            $session = $this->input->post('session');
+            $postingdate = $this->input->post('postingdate');
+            $status = $this->input->post('status');
 
             $sql = "UPDATE session SET session='$session', postingdate='$postingdate', status='$status' WHERE id=$id";
         
@@ -83,10 +83,10 @@ class Session_model extends CI_Model {
         function ajax_update(){
             $this->load->database();
         if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
-            $id = $_POST['id'];
-            $session = $_POST['session'];
-            $postingdate = $_POST['postingdate'];
-            $status = $_POST['status'];
+            $id = $this->input->post('id');
+            $session = $this->input->post('session');
+            $postingdate = $this->input->post('postingdate');
+            $status = $this->input->post('status');
 
             $sql = "UPDATE session SET session='$session', postingdate='$postingdate', status='$status' WHERE id=$id";
             

@@ -2,8 +2,8 @@
 class State_model extends CI_Model {
 
     function create(){
-        $name = $_POST['name'];
-        $country_id = $_POST['country_id'];
+        $name = $this->input->post('name');
+        $country_id = $this->input->post('country_id');
     
         $sql = "INSERT INTO states (name, country_id) VALUES ('$name', '$country_id' )";
         $this->load->database();
@@ -35,10 +35,10 @@ class State_model extends CI_Model {
 
     function update(){
         $this->load->database();
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-            $id = $_POST['id'];
-            $name = $_POST['name'];
-            $country_id = $_POST['country_id'];
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && $this->input->post('submit')) {
+            $id = $this->input->post('id');
+            $name = $this->input->post('name');
+            $country_id = $this->input->post('country_id');
 
             $sql = "UPDATE states SET name='$name', country_id='$country_id' WHERE id=$id";
         
@@ -80,9 +80,9 @@ class State_model extends CI_Model {
         function ajax_update(){
             $this->load->database();
             if ($_SERVER["REQUEST_METHOD"] == "POST" ) {
-                $id = $_POST['id'];
-                $name = $_POST['name'];
-                $country_id = $_POST['country_id'];
+                $id = $this->input->post('id');
+                $name = $this->input->post('name');
+                $country_id = $this->input->post('country_id');
     
                 $sql = "UPDATE states SET name='$name', country_id='$country_id' WHERE id=$id";
             

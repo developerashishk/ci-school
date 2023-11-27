@@ -10,7 +10,7 @@ class Subject extends CI_Controller {
         $this->load->view("subject/index");
     }
     function create(){
-        if (isset($_POST['submit'])) {
+        if ($this->input->post('submit')) {
             $this->load->model('Subject_model');
             $this->Subject_model->create();
         }
@@ -70,10 +70,18 @@ class Subject extends CI_Controller {
 
     function ajax_create(){
         $data=[];
-        if(empty($_POST['cshort']) || empty($_POST['cfull']) || empty($_POST['sub1']) || empty($_POST['sub2']) || empty($_POST['sub3']) || empty($_POST['sub4'])){
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('cfull', 'cfull', 'required');
+        $this->form_validation->set_rules('sub1', 'sub1', 'required');
+        $this->form_validation->set_rules('sub2', 'sub2', 'required');
+        $this->form_validation->set_rules('sub3', 'sub3', 'required');
+        $this->form_validation->set_rules('sub4', 'sub4', 'required');
+        $this->form_validation->set_rules('dt_created', 'dt_created', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
             $data=array(
                 'status'=>false,
-                'msg'=>"Mandatory fields or numbers are not allowed!!"
+                'msg'=>json_encode($this->form_validation->error_array())
             );
         }else{
             $data=array(
