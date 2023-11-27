@@ -19,6 +19,11 @@ class Course_model extends CI_Model {
         $this->load->database();
         $sql = "SELECT * FROM tbl_course ORDER BY cid ";
         $result = $this->db->query($sql)->result_array();
+        // Loop through each item in the $result array
+        foreach ($result as &$item) {
+            $item['update'] = "<a onclick=update(" . json_encode($item) . "); class='btn btn-primary'>update</a>";
+            $item['del'] = "<a onclick=ajax_del(" . $item["cid"] . "); class='btn btn-danger'>Delete</a>"; 
+        }
         return $result;
     }
 

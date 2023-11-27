@@ -5,7 +5,6 @@ class Session_model extends CI_Model {
         $session = $_POST['session'];
         $postingdate = $_POST['postingdate'];
         $status = $_POST['status'];
-    
         $sql = "INSERT INTO session (session, postingdate, status) VALUES ('$session', '$postingdate', '$status' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
@@ -19,6 +18,11 @@ class Session_model extends CI_Model {
         $this->load->database();
         $sql = "SELECT * FROM session";
         $result = $this->db->query($sql)->result_array();
+         // Loop through each item in the $result array
+         foreach ($result as &$item) {
+            $item['update'] = "<a onclick=update(" . json_encode($item) . "); class='btn btn-primary'>update</a>";
+            $item['del'] = "<a onclick=ajax_del(" . $item["id"] . "); class='btn btn-danger'>Delete</a>"; 
+        }
         return $result;
     }
 

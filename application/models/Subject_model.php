@@ -8,8 +8,6 @@ class Subject_model extends CI_Model {
         $sub3 = $_POST['sub3'];
         $sub4 = $_POST['sub4'];
         $dt_created = $_POST['dt_created'];
-        
-    
         $sql = "INSERT INTO subject (cfull, sub1, sub2, sub3, sub4, dt_created) VALUES ('$cfull', '$sub1', '$sub2', '$sub3', '$sub4', '$dt_created' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {
@@ -23,6 +21,11 @@ class Subject_model extends CI_Model {
         $this->load->database();
         $sql = "SELECT * FROM subject ORDER BY subid ";
         $result = $this->db->query($sql)->result_array();
+        // Loop through each item in the $result array
+        foreach ($result as &$item) {
+            $item['update'] = "<a onclick=update(" . json_encode($item) . "); class='btn btn-primary'>update</a>";
+            $item['del'] = "<a onclick=ajax_del(" . $item["subid"] . "); class='btn btn-danger'>Delete</a>"; 
+        }
         return $result;
     }
 

@@ -168,34 +168,9 @@
 </div>
 <!-- /.content-wrapper -->
 <!-- script  -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"
+<script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <script>
-   
-    function renderList() {
-    $.ajax({
-        url: "<?php echo base_url("/course/ajax_records"); ?>",
-        success: function(result) {
-            result=JSON.parse(result);
-            var recordHTML="";
-            result.records.forEach(function(row) {
-                    recordHTML += `<tr>
-                        <td>${row.cid}</td>
-                        <td>${row.cshort}</td>
-                        <td>${row.cfull}</td>
-                        <td>${row.cdate}</td>
-                        <td>${row.update_date}</td>
-                        <td><a onclick='update(${JSON.stringify(row)})' class="btn btn-primary">Update</a></td>
-                        <td><a onclick='ajax_del(${row.cid})' class="btn btn-danger">Delete</a></td>
-                    </tr>`;
-                });
-            $("#records").html(recordHTML);
-        }
-    });
-}
 
     function ajax_del(cid) {
         if (confirm("Are you sure?") == false) {
@@ -204,7 +179,7 @@
         $.ajax({
             url: "<?php echo base_url("/course/ajax_del/"); ?>" + cid,
             success: function(result) {
-                renderList();
+                mydatatable.ajax.reload();
             }
         });
     }
@@ -218,7 +193,7 @@
             success: function(result) {
                 result = JSON.parse(result);
                 if (result.status == true) {
-                    renderList();
+                    mydatatable.ajax.reload();
                     document.getElementById("createCityForm").reset();
                     $("#exampleModal").modal('hide');
                     // add_modal.hide();
@@ -247,7 +222,7 @@ function update(data) {
             url: "<?php echo base_url("/course/ajax_update"); ?>",
             data: formdata,
             success: function(result) {
-                renderList();
+                mydatatable.ajax.reload();
                 edit_modal.hide();
                 // document.getElementById("updateCityForm").style.display="none";
             }
@@ -256,8 +231,23 @@ function update(data) {
     }
     var add_modal = null;
     var edit_modal = null;
+    var mydatatable =null;
     $(document).ready(function() {
-        renderList();
+        mydatatable=$('#example2').DataTable( {
+            "ajax": {
+                "url": "<?php echo base_url("/course/ajax_records"); ?>",
+                "dataSrc": "records"
+            },
+            "columns": [
+                { "data": "cid" },
+                { "data": "cshort" },
+                { "data": "cfull" },
+                { "data": "cdate" },
+                { "data": "update_date" },
+                { "data": "update" },
+                { "data": "del" },
+            ]
+        } );
         add_modal = new bootstrap.Modal(document.getElementById('exampleModal'));
         edit_modal = new bootstrap.Modal(document.getElementById('editModal'));
     });

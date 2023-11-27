@@ -173,7 +173,6 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Sub ID</th>
-                                            <th scope="col">C Short</th>
                                             <th scope="col">C Full</th>
                                             <th scope="col">Sub 1</th>
                                             <th scope="col">Sub 2</th>
@@ -206,41 +205,14 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 <script>
-function renderList() {
-    $.ajax({
-        url: "<?php echo base_url("/subject/ajax_records"); ?>",
-        success: function(result) {
-            result = JSON.parse(result);
-            var recordHTML = "";
-            result.records.forEach(function(row) {
-                recordHTML += `<tr>
-                            <td>${row.subid}</td>
-                            <td>${row.cshort}</td>
-                            <td>${row.cfull}</td>
-                            <td>${row.sub1}</td>
-                            <td>${row.sub2}</td>
-                            <td>${row.sub3}</td>
-                            <td>${row.sub4}</td>
-                            <td>${row.dt_created}</td>
-                            <td>${row.update_date}</td>
-                            <td><a onclick='update(${JSON.stringify(row)})' class="btn btn-primary">Update</a></td>
-                            <td><a onclick='ajax_del(${row.subid})' class="btn btn-danger">Delete</a></td>
-                        </tr>`;
-            });
-            $("#records").html(recordHTML);
-        }
-    });
-}
-
-
-function ajax_del(id) {
+function ajax_del(subid) {
     if (confirm("Are you sure?") == false) {
         return
     }
     $.ajax({
-        url: "<?php echo base_url("/subject/ajax_del/"); ?>" + id,
+        url: "<?php echo base_url("/subject/ajax_del/"); ?>" + subid,
         success: function(result) {
-            renderList();
+            mydatatable.ajax.reload();
         }
     });
 }
@@ -254,7 +226,7 @@ function addCity() {
             success: function(result) {
                 result = JSON.parse(result);
                 if (result.status == true) {
-                    renderList();
+                    mydatatable.ajax.reload();
                     document.getElementById("createCityForm").reset();
                     $("#exampleModal").modal('hide');
                     // add_modal.hide();
@@ -274,6 +246,8 @@ function update(data) {
                 document.getElementById("update_sub2").value = data.sub2;
                 document.getElementById("update_sub3").value = data.sub3;
                 document.getElementById("update_sub4").value = data.sub4;
+                document.getElementById("update_dt_created").value = data.dt_created;
+                document.getElementById("update_update_date").value = data.update_date;
                 document.getElementById("update_subid").value = data.subid;
             }
 
@@ -284,7 +258,7 @@ function updateCity() {
         url: "<?php echo base_url("/subject/ajax_update"); ?>",
         data: formdata,
         success: function(result) {
-            renderList();
+            mydatatable.ajax.reload();
             edit_modal.hide();
             // document.getElementById("updateCityForm").style.display="none";
         }
@@ -293,8 +267,26 @@ function updateCity() {
 }
 var add_modal = null;
 var edit_modal = null;
+var mydatatable =null;
 $(document).ready(function() {
-    renderList();
+    mydatatable=$('#example2').DataTable( {
+            "ajax": {
+                "url": "<?php echo base_url("/subject/ajax_records"); ?>",
+                "dataSrc": "records"
+            },
+            "columns": [
+                { "data": "subid" },
+                { "data": "cfull" },
+                { "data": "sub1" },
+                { "data": "sub2" },
+                { "data": "sub3" },
+                { "data": "sub4" },
+                { "data": "dt_created" },
+                { "data": "update_date" },
+                { "data": "update" },
+                { "data": "del" },
+            ]
+        } );
     add_modal = new bootstrap.Modal(document.getElementById('exampleModal'));
     edit_modal = new bootstrap.Modal(document.getElementById('editModal'));
 });

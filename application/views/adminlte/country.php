@@ -152,26 +152,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 <script>
-function renderList() {
-    $.ajax({
-        url: "<?php echo base_url("/country/ajax_records"); ?>",
-        success: function(result) {
-            result = JSON.parse(result);
-            var recordHTML = "";
-            result.records.forEach(function(row) {
-                recordHTML += `<tr>
-                            <td>${row.id}</td>
-                            <td>${row.name}</td>
-                            <td>${row.sortname}</td>
-                            <td><a onclick='update(${JSON.stringify(row)})' class="btn btn-primary">Update</a></td>
-                            <td><a onclick='ajax_del(${row.id})' class="btn btn-danger">Delete</a></td>
-                        </tr>`;
-            });
-            $("#records").html(recordHTML);
-        }
-    });
-}
-
 function ajax_del(id) {
     if (confirm("Are you sure?") == false) {
         return
@@ -179,7 +159,7 @@ function ajax_del(id) {
     $.ajax({
         url: "<?php echo base_url("/country/ajax_del/"); ?>" + id,
         success: function(result) {
-            renderList();
+            mydatatable.ajax.reload();
         }
     });
 }
@@ -194,7 +174,7 @@ function addCity() {
             success: function(result) {
                 result = JSON.parse(result);
                 if (result.status == true) {
-                    renderList();
+                    mydatatable.ajax.reload();
                     document.getElementById("createCityForm").reset();
                     $("#exampleModal").modal('hide');
                     // add_modal.hide();
@@ -221,7 +201,7 @@ function updateCity() {
         url: "<?php echo base_url("/country/ajax_update"); ?>",
         data: formdata,
         success: function(result) {
-            renderList();
+            mydatatable.ajax.reload();
             edit_modal.hide();
             // document.getElementById("updateCityForm").style.display="none";
         }
@@ -230,8 +210,21 @@ function updateCity() {
 }
 var add_modal = null;
 var edit_modal = null;
+var mydatatable =null;
 $(document).ready(function() {
-    renderList();
+    mydatatable=$('#example2').DataTable( {
+            "ajax": {
+                "url": "<?php echo base_url("/country/ajax_records"); ?>",
+                "dataSrc": "records"
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "name" },
+                { "data": "sortname" },
+                { "data": "update" },
+                { "data": "del" },
+            ]
+        } );
     add_modal = new bootstrap.Modal(document.getElementById('exampleModal'));
     edit_modal = new bootstrap.Modal(document.getElementById('editModal'));
 });

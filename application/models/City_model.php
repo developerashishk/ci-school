@@ -3,7 +3,6 @@ class City_model extends CI_Model {
 
     function create(){
         $name = $_POST['name'];
-    
         $sql = "INSERT INTO cities (name) VALUES ('$name' )";
         $this->load->database();
         if ($this->db->query($sql) === TRUE) {

@@ -134,11 +134,12 @@
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">State Code</th>
-                                            <th scope="col">Update</th>
-                                            <th scope="col">Delete</th>
+                                        <th scope="col">ID</th>
+                        <th scope="col">Session</th>
+                        <th scope="col">Posting Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Update</th>
+                        <th scope="col">Delete</th>
                                         </tr>
                                     </thead>
 
@@ -164,28 +165,6 @@
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
     crossorigin="anonymous"></script>
 <script>
-function renderList() {
-    $.ajax({
-        url: "<?php echo base_url("/session/ajax_records"); ?>",
-        success: function(result) {
-            result = JSON.parse(result);
-            var recordHTML = "";
-            result.records.forEach(function(row) {
-                recordHTML += `<tr>
-                            <td>${row.id}</td>
-                            <td>${row.session}</td>
-                            <td>${row.postingdate}</td>
-                            <td>${row.status}</td>
-                            <td><a onclick='update(${JSON.stringify(row)})' class="btn btn-primary">Update</a></td>
-                            <td><a onclick='ajax_del(${row.id})' class="btn btn-danger">Delete</a></td>
-                        </tr>`;
-            });
-            $("#records").html(recordHTML);
-        }
-    });
-}
-
-
 function ajax_del(id) {
     if (confirm("Are you sure?") == false) {
         return
@@ -193,7 +172,7 @@ function ajax_del(id) {
     $.ajax({
         url: "<?php echo base_url("/session/ajax_del/"); ?>" + id,
         success: function(result) {
-            renderList();
+            mydatatable.ajax.reload();
         }
     });
 }
@@ -208,7 +187,7 @@ function addCity() {
             success: function(result) {
                 result = JSON.parse(result);
                 if (result.status == true) {
-                    renderList();
+                    mydatatable.ajax.reload();
                     document.getElementById("createCityForm").reset();
                     $("#exampleModal").modal('hide');
                     // add_modal.hide();
@@ -236,20 +215,37 @@ function updateCity() {
         url: "<?php echo base_url("/session/ajax_update"); ?>",
         data: formdata,
         success: function(result) {
-            renderList();
+            mydatatable.ajax.reload();
             edit_modal.hide();
             // document.getElementById("updateCityForm").style.display="none";
         }
     });
     return false;
-}
-var add_modal = null;
-var edit_modal = null;
-$(document).ready(function() {
-    renderList();
-    add_modal = new bootstrap.Modal(document.getElementById('exampleModal'));
-    edit_modal = new bootstrap.Modal(document.getElementById('editModal'));
-});
+    }
+    
+        var add_modal = null;
+        var edit_modal = null;
+        var mydatatable =null;
+        $(document).ready(function() {
+            
+            mydatatable=$('#example2').DataTable( {
+            "ajax": {
+                "url": "<?php echo base_url("/session/ajax_records"); ?>",
+            "dataSrc": "records"
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "session" },
+                { "data": "postingdate" },
+                { "data": "status" },
+                { "data": "update" },
+                { "data": "del" },
+            ]
+        } );
+        
+        add_modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        edit_modal = new bootstrap.Modal(document.getElementById('editModal'));
+    });
 </script>
 <!-- script -->
 <?php include "inc/footer.php" ?>

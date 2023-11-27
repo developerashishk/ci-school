@@ -22,6 +22,11 @@ class Login_model extends CI_Model {
         $this->load->database();
         $sql = "SELECT * FROM tbl_login";
         $result = $this->db->query($sql)->result_array();
+        // Loop through each item in the $result array
+        foreach ($result as &$item) {
+            $item['update'] = "<a onclick=update(" . json_encode($item) . "); class='btn btn-primary'>update</a>";
+            $item['del'] = "<a onclick=ajax_del(" . $item["id"] . "); class='btn btn-danger'>Delete</a>"; 
+        }
         return $result;
     }
 
