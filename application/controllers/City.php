@@ -66,10 +66,13 @@ class City extends CI_Controller {
 
     function ajax_create(){
         $data=[];
-        if(empty($_POST['name']) || is_numeric($_POST['name'])){
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        if ($this->form_validation->run() == FALSE)
+        {
             $data=array(
                 'status'=>false,
-                'msg'=>"Mandatory fields or numbers are not allowed!!"
+                'msg'=>json_encode($this->form_validation->error_array())
             );
         }else{
             $data=array(
